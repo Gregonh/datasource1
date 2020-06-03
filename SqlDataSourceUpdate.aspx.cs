@@ -19,5 +19,11 @@ namespace datasource1
             e.Command.Parameters["@RegionID"].Value = 5;
             e.Command.Parameters["@RegionDescription"].Value = "Europe";
         }
+
+        // faltaba la llamata a details_region inserted para que no diera error, por ahora la segunda lista de regiones no permite borrar ni inserta etc
+        protected void DetailsRegion_Inserted(object sender, SqlDataSourceStatusEventArgs e)
+        {
+
+        }
     }
 }
