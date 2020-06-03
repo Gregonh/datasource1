@@ -10,7 +10,13 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [ProductName], [ProductID] FROM [Products]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [ProductName], [ProductID] FROM [Products]">
+
+                <SelectParameters>
+                    <asp:QueryStringParameter Name="ProductID1" QueryStringField="prodID" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+         <asp:DetailsView ID="detailsProduct" runat="server" DataSourceID="SqlDataSource1" />
         </div>
     </form>
 </body>
