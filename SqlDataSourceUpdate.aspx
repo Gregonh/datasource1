@@ -13,7 +13,8 @@
              <br />
             <br />
             <asp:ListBox ID="ListBox1" runat="server" DataSourceID="sourceProducts" DataTextField="ProductName" DataValueField="ProductID" AutoPostBack="True" Height="100px"></asp:ListBox>
-            <!--un listbox que tiene que tener un datasource id con el mismo nombre que el sqldatasource de abajo, ahora su datasource para hacer el select-->
+            <!--un listbox que tiene que tener un datasource id con el mismo nombre que el sqldatasource de abajo, ahora su datasource para hacer el select. Tiene que tener un datavalueField con el mismo nombre
+                que el controlParameter de abajo-->
             <asp:SqlDataSource ID="sourceProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [ProductID], [ProductName] FROM [Products]"></asp:SqlDataSource>
             <br />
             <br />
@@ -21,11 +22,12 @@
             <asp:SqlDataSource ID="sourceProductDetails" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
                 SelectCommand="SELECT [ProductID], [ProductName], [QuantityPerUnit], [UnitPrice], [UnitsInStock], [UnitsOnOrder], [ReorderLevel], [Discontinued] FROM [Products] WHERE ([ProductID] = @ProductID)" 
                 UpdateCommand="UPDATE [Products] SET [ProductName] = @ProductName, [QuantityPerUnit] = @QuantityPerUnit, [UnitPrice] = @UnitPrice, [UnitsInStock] = @UnitsInStock, [UnitsOnOrder] = @UnitsOnOrder, [ReorderLevel] = @ReorderLevel, [Discontinued] = @Discontinued WHERE [ProductID] = @ProductID">
-                 <SelectParameters>
-                     <!-- un controlparameter con el nombre de la lista en el control id y en propertyname selected value-->
+               
+                <SelectParameters>
                     <asp:ControlParameter ControlID="ListBox1" Name="ProductID" PropertyName="SelectedValue" Type="Int32" />
                 </SelectParameters>
              </asp:SqlDataSource>
+             <!-- un controlparameter con el nombre de la lista en el control id y en propertyname selected value-->
             <br />
             <br />
             <!--un detailview con un datasourceid que tiene el nombre delsqldatasource de justo arriba-->
@@ -36,6 +38,9 @@
             <br />
             <br />
             <br />
+            <!-- por ahora funciona solo el update para cambiar el nombre de la region-->
+            <!--el listbox tiene el datesourceid con el mismo nombre que el sqldatasource y hace un select;
+                un datavalueField con el nombre del parametro del insertParameter, pero no estoy seguro-->
             <asp:ListBox ID="ListBox2" runat="server" AutoPostBack="True" DataSourceID="RegionID" DataTextField="RegionDescription" DataValueField="RegionID"></asp:ListBox>
             <asp:SqlDataSource ID="RegionID" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [RegionID], [RegionDescription] FROM [Region]"></asp:SqlDataSource>
             <br />
