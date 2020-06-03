@@ -106,6 +106,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="App_Data\ASPNETStepByStep4.mdf" />
+    <Content Include="App_Data\ASPNETStepByStep4_log.ldf">
+      <DependentUpon>ASPNETStepByStep4.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\northwnd.mdf" />
     <Content Include="App_Data\northwnd_log.ldf">
       <DependentUpon>northwnd.mdf</DependentUpon>

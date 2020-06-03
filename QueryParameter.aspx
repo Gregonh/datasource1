@@ -10,7 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [ProductName], [ProductID] FROM [Products]">
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Products] WHERE ([ProductID] = @ProductID1)">
 
                 <SelectParameters>
                     <asp:QueryStringParameter Name="ProductID1" QueryStringField="prodID" />
