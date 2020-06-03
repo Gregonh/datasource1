@@ -63,6 +63,20 @@
                  </SelectParameters>
              </asp:SqlDataSource>
              <br />
+            <!--
+                Consideramos dos controles para almacenar datos de la base de datos NorthWnd
+
+                El primero seria un tipo List con todos los clientes, extraidos de la tabla Customers Una vez seleccionado un cliente,
+                se hace un postback automatico y todas las ordenes de pedido hechas por ese cliente (tabla Orders se muestran en
+                un segundo control GridView
+
+                En el GridView mostraremos los campos OrderID OrderDate y ShippedDate de la table Orders
+
+                Usaremos dos SqlDataSource uno para el tipo List y otro para el GridView
+
+                Finalmente definiremos un parametro OrderDate para mostrar las ordenes de pedido con un determinado rango
+                temporal, en este caso con una fecha posterior a la que decidamos
+                -->
              <asp:GridView ID="gridOrders" runat="server" AutoGenerateColumns="False" DataKeyNames="OrderID" DataSourceID="sourceCustomersID">
                  <Columns>
                      <asp:BoundField DataField="OrderID" HeaderText="OrderID" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" />
