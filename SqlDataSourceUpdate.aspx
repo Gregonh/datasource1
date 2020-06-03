@@ -12,9 +12,34 @@
         <div>
              <br />
             <br />
+            <!-- SqlDataSource puede también aplicar cambios a la base de datos
+
+            No todos los controles soportan esta capacidad por ejemplo los tipo List como ListBox etc
+                
+                Siempre que hagamos esto y le pongamos el simbolo @(ProductName se convierte en @ProductName
+                necesitamos definir el parámetro explicitamente ya que los controles de datos de ASP net automáticamente
+                los rellenar á n con los valores de la base de datos en caso de SQL Update) para permitirnos su modificación
+                Por otro lado necesitamos activar esta capacidad en el control de datos por ejemplo DetailsView La
+                propiedad AutoGenerateEditButton true
+                -->
+
             <asp:ListBox ID="ListBox1" runat="server" DataSourceID="sourceProducts" DataTextField="ProductName" DataValueField="ProductID" AutoPostBack="True" Height="100px"></asp:ListBox>
             <!--un listbox que tiene que tener un datasource id con el mismo nombre que el sqldatasource de abajo, ahora su datasource para hacer el select. Tiene que tener un datavalueField con el mismo nombre
-                que el controlParameter de abajo-->
+                que el controlParameter de abajo
+                
+                Definimos dos controles SQLDataSource
+
+                Uno que sirva como fuente de datos del
+                control tipo List y que seleccione los campos
+                ProductName y ProductID de la tabla Products
+
+                Otro que sirva para recuperar la fila de la tabla
+                Products que tenga como ProductID el
+                seleccionado en la lista anterior (se ve el el select parameter) y que nos
+                permita también actualizer los campos Este
+                SQLDataSource servirá como Fuente de datos
+                del control DetailsView
+                -->
             <asp:SqlDataSource ID="sourceProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [ProductID], [ProductName] FROM [Products]"></asp:SqlDataSource>
             <br />
             <br />
@@ -30,7 +55,13 @@
              <!-- un controlparameter con el nombre de la lista en el control id y en propertyname selected value-->
             <br />
             <br />
-            <!--un detailview con un datasourceid que tiene el nombre delsqldatasource de justo arriba-->
+            <!--un detailview con un datasourceid que tiene el nombre delsqldatasource de justo arriba
+                Usar un control DetailsView permite mostrar una
+                fila por cada campo de la tabla que hayamos
+                obtenido Siempre que la propiedad
+                AutoGenerateRows true
+                
+                -->
             <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateEditButton="True" DataSourceID="sourceProductDetails" Height="50px" Width="125px">
             </asp:DetailsView>
             <br />
