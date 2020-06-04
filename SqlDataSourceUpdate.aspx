@@ -74,11 +74,12 @@
                 
                 
                 -->
+
             <asp:SqlDataSource ID="sourceProductDetails" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"
-                SelectCommand="SELECT [ProductID], [ProductName], [QuantityPerUnit], [UnitPrice], [UnitsInStock], [UnitsOnOrder], [ReorderLevel], [Discontinued] FROM [Products] WHERE ([ProductID] = @ProductID)"
-                UpdateCommand="UPDATE [Products] SET [ProductName] = @ProductName, [QuantityPerUnit] = @QuantityPerUnit, 
-                              [UnitPrice] = @UnitPrice, [UnitsInStock] = @UnitsInStock, [UnitsOnOrder] = @UnitsOnOrder, 
-                              [ReorderLevel] = @ReorderLevel, [Discontinued] = @Discontinued 
+                SelectCommand="SELECT [ProductID], [ProductName], [QuantityPerUnit], [UnitPrice], [UnitsInStock], [UnitsOnOrder], [ReorderLevel], [Discontinued] FROM [Products] WHERE ([ProductID] = @ProductID)" 
+               UpdateCommand="UPDATE [Products] SET [ProductName] = @ProductName, [QuantityPerUnit] = @QuantityPerUnit,
+                              [UnitPrice] = @UnitPrice, [UnitsInStock] = @UnitsInStock, [UnitsOnOrder] = @UnitsOnOrder,
+                             [ReorderLevel] = @ReorderLevel, [Discontinued] = @Discontinued
                               WHERE [ProductID] = @ProductID
                               AND ProductName=@original_ProductName AND UnitPrice=@original_UnitPrice 
                               AND UnitsInStock=@original_UnitsInStock AND UnitsOnOrder=@original_UnitsOnOrder 
