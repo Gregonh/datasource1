@@ -25,5 +25,21 @@ namespace datasource1
         {
 
         }
+
+        // metodo para comprobar si fallo el update o pudo actualizar, recordar que necesita el label en el html para mostrar el resultado
+        protected void sourceProductDetails_Updated(object sender, SqlDataSourceStatusEventArgs e)
+        {
+            if (e.AffectedRows == 0)
+            {
+                lblInfo.Text = "Warning> No update was performed. " +
+                "A concurrency error is likely, or the command is incorrectly written.";
+            }
+            else
+            {
+                lblInfo.Text = "Record successfully updated.";
+            }
+
+
+        }
     }
 }

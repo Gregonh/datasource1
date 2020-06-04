@@ -44,14 +44,52 @@
             <br />
             <br />
             <!--un sqldata source para hacer un update, antes tiene un select para poder ver lo que queremos cambiar-->
-            <asp:SqlDataSource ID="sourceProductDetails" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-                SelectCommand="SELECT [ProductID], [ProductName], [QuantityPerUnit], [UnitPrice], [UnitsInStock], [UnitsOnOrder], [ReorderLevel], [Discontinued] FROM [Products] WHERE ([ProductID] = @ProductID)" 
-                UpdateCommand="UPDATE [Products] SET [ProductName] = @ProductName, [QuantityPerUnit] = @QuantityPerUnit, [UnitPrice] = @UnitPrice, [UnitsInStock] = @UnitsInStock, [UnitsOnOrder] = @UnitsOnOrder, [ReorderLevel] = @ReorderLevel, [Discontinued] = @Discontinued WHERE [ProductID] = @ProductID">
-               
-                <SelectParameters>
+
+
+             <!--
+                Cuando actualizamos datos tenemos el riesgo de que haya un problema de concurrencia si elegimos modificar un
+                registro que estan siendo editado por otro usuario
+
+                Una técnica para solucionar esto consiste en hacer un commando UPDATE con una clausula WHERE donde todos los
+                campos del registro sean iguales a los que se seleccionaron inicialmente al mostrar el regsistro
+                UPDATE [Products]
+                SET [ ProductName]= @ProductName,  [QuantityPerUnit] =  @QuantityPerUnit (... y el resto de campo como los anteriores)
+                WHERE [ProductID]= @ProductID AND ProductName=@original_ProductName AND UnitPrice= @original_UnitPrice
+                AND
+                UnitsInStock= @original_UnitsInStock (.. y resto de campos igual con And y lo otro)
+                Antes de que este commando funcione debemos indicarle al SqlDataSource que mantenga los valores antiguos y que
+                los asigne a los parametros cuyo nombre empiezan por original_
+                
+                Haremos esto mediante dos propiedades
+                ConflictDetection = "CompareAllValues" // por defecto es OverwriteChanges
+                OldValuesParameterFormatString ="original_{0}"
+                
+                // SqlDataSource no lanza una excepción para notificar si el UPDATE no se ha realizado
+                Necesitamos manejar el evento Updated y comprobar la propiedad
+                SqlDataSourceStatusEventArgs AffectedRows
+
+                Si es este valor es 0 no se ha actualizado ning ú n registro y deberiamos notificar al
+                usuario sobre un posible problema de concurrencia e intentar el Update de nuevo,
+                una vez cargado el registro nuevamente
+                
+                
+                -->
+            <asp:SqlDataSource ID="sourceProductDetails" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"
+                SelectCommand="SELECT [ProductID], [ProductName], [QuantityPerUnit], [UnitPrice], [UnitsInStock], [UnitsOnOrder], [ReorderLevel], [Discontinued] FROM [Products] WHERE ([ProductID] = @ProductID)"
+                UpdateCommand="UPDATE [Products] SET [ProductName] = @ProductName, [QuantityPerUnit] = @QuantityPerUnit, 
+                              [UnitPrice] = @UnitPrice, [UnitsInStock] = @UnitsInStock, [UnitsOnOrder] = @UnitsOnOrder, 
+                              [ReorderLevel] = @ReorderLevel, [Discontinued] = @Discontinued 
+                              WHERE [ProductID] = @ProductID
+                              AND ProductName=@original_ProductName AND UnitPrice=@original_UnitPrice 
+                              AND UnitsInStock=@original_UnitsInStock AND UnitsOnOrder=@original_UnitsOnOrder 
+                              AND ReorderLevel=@original_ReorderLevel AND Discontinued=@original_Discontinued" 
+                ConflictDetection="CompareAllValues"
+                OldValuesParameterFormatString="original_{0}"
+                OnUpdated="sourceProductDetails_Updated"> 
+                 <SelectParameters>
                     <asp:ControlParameter ControlID="ListBox1" Name="ProductID" PropertyName="SelectedValue" Type="Int32" />
                 </SelectParameters>
-             </asp:SqlDataSource>
+            </asp:SqlDataSource>
              <!-- un controlparameter con el nombre de la lista en el control id y en propertyname selected value-->
             <br />
             <br />
@@ -66,6 +104,7 @@
             </asp:DetailsView>
             <br />
             <br />
+             <asp:Label ID="lblInfo" runat="server" Text="Label"></asp:Label>
             <br />
             <br />
             <br />
@@ -99,34 +138,7 @@
             <br />
             <br />
 
-            <!--
-                Cuando actualizamos datos tenemos el riesgo de que haya un problema de concurrencia si elegimos modificar un
-                registro que estan siendo editado por otro usuario
-
-                Una técnica para solucionar esto consiste en hacer un commando UPDATE con una clausula WHERE donde todos los
-                campos del registro sean iguales a los que se seleccionaron inicialmente al mostrar el regsistro
-                UPDATE [Products]
-                SET [ ProductName]= @ProductName,  [QuantityPerUnit] =  @QuantityPerUnit (... y el resto de campo como los anteriores)
-                WHERE [ProductID]= @ProductID AND ProductName=@original_ProductName AND UnitPrice= @original_UnitPrice
-                AND
-                UnitsInStock= @original_UnitsInStock (.. y resto de campos igual con And y lo otro)
-                Antes de que este commando funcione debemos indicarle al SqlDataSource que mantenga los valores antiguos y que
-                los asigne a los parametros cuyo nombre empiezan por original_
-                
-                Haremos esto mediante dos propiedades
-                ConflictDetection = "CompareAllValues" // por defecto es OverwriteChanges
-                OldValuesParameterFormatString ="original_{0}"
-                
-                // SqlDataSource no lanza una excepción para notificar si el UPDATE no se ha realizado
-                Necesitamos manejar el evento Updated y comprobar la propiedad
-                SqlDataSourceStatusEventArgs AffectedRows
-
-                Si es este valor es 0 no se ha actualizado ning ú n registro y deberiamos notificar al
-                usuario sobre un posible problema de concurrencia e intentar el Update de nuevo,
-                una vez cargado el registro nuevamente
-                
-                
-                -->
+           
 
 
         </div>
