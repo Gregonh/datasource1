@@ -114,6 +114,7 @@
     <Content Include="App_Data\northwnd_log.ldf">
       <DependentUpon>northwnd.mdf</DependentUpon>
     </Content>
+    <Content Include="AutoresTitulos.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -180,6 +181,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AutoresTitulos.aspx.cs">
+      <DependentUpon>AutoresTitulos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AutoresTitulos.aspx.designer.cs">
+      <DependentUpon>AutoresTitulos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
