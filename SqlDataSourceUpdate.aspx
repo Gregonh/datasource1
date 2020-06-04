@@ -98,6 +98,37 @@
             </asp:DetailsView>
             <br />
             <br />
+
+            <!--
+                Cuando actualizamos datos tenemos el riesgo de que haya un problema de concurrencia si elegimos modificar un
+                registro que estan siendo editado por otro usuario
+
+                Una técnica para solucionar esto consiste en hacer un commando UPDATE con una clausula WHERE donde todos los
+                campos del registro sean iguales a los que se seleccionaron inicialmente al mostrar el regsistro
+                UPDATE [Products]
+                SET [ ProductName]= @ProductName,  [QuantityPerUnit] =  @QuantityPerUnit (... y el resto de campo como los anteriores)
+                WHERE [ProductID]= @ProductID AND ProductName=@original_ProductName AND UnitPrice= @original_UnitPrice
+                AND
+                UnitsInStock= @original_UnitsInStock (.. y resto de campos igual con And y lo otro)
+                Antes de que este commando funcione debemos indicarle al SqlDataSource que mantenga los valores antiguos y que
+                los asigne a los parametros cuyo nombre empiezan por original_
+                
+                Haremos esto mediante dos propiedades
+                ConflictDetection = "CompareAllValues" // por defecto es OverwriteChanges
+                OldValuesParameterFormatString ="original_{0}"
+                
+                // SqlDataSource no lanza una excepción para notificar si el UPDATE no se ha realizado
+                Necesitamos manejar el evento Updated y comprobar la propiedad
+                SqlDataSourceStatusEventArgs AffectedRows
+
+                Si es este valor es 0 no se ha actualizado ning ú n registro y deberiamos notificar al
+                usuario sobre un posible problema de concurrencia e intentar el Update de nuevo,
+                una vez cargado el registro nuevamente
+                
+                
+                -->
+
+
         </div>
     </form>
 </body>
