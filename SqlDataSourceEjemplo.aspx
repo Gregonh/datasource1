@@ -10,6 +10,18 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <!--
+               - un dropdownlist que va a tener dos sqldatasourcecode, un boton y un detailsview
+                -el primer sqldatasource hace un select; y le pasa la consulta al dropdownlist para ello el dropdown tiene el datasourceid 
+                        - el boton activa una funcion del.cs ; mandando lo seleccionado en la dropdownlist1 como una variable a la vistaqueryparameter
+                    
+                -el segundo sqldatasource hace un select con el elemento seleccionado del dropdown; para ello tiene un controlparameter vinculado a la dropdownlist1 de modo que al hacer selectedvalue
+                le pasa el elemento seleccionado al detailsview.
+                        - el detailsview1 es importante que no tenga las autogeneraterows en true, sino pone el resultado dos veces.
+                          se vincula a la sqldatasource2 con el datasourceid
+                          se vincula a la dropdownlist (al valor seleccionado) con datakeynames
+                
+             -->
             <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="ProductName" DataValueField="ProductID" AutoPostBack="True">
             </asp:DropDownList>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [ProductID], [ProductName], [SupplierID] FROM [Products]"></asp:SqlDataSource>
@@ -26,7 +38,7 @@
              <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Seleccionar Producto" Width="171px" />
             <br />
             <br />
-            <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="125px" AutoGenerateRows="True" BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ProductID" DataSourceID="SqlDataSource2">
+            <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ProductID" DataSourceID="SqlDataSource2">
                 <EditRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" />
                 <Fields>
                     <asp:BoundField DataField="ProductID" HeaderText="ProductID" InsertVisible="False" ReadOnly="True" SortExpression="ProductID" />
@@ -46,6 +58,15 @@
                 <RowStyle BackColor="White" ForeColor="#330099" />
              </asp:DetailsView>
              <br />
+            <br />
+            <hr />
+
+
+
+
+
+
+
              <asp:SqlDataSource ID="sourceCustomers" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [CustomerID], [ContactName], [CompanyName] FROM [Customers] ORDER BY [ContactName]"></asp:SqlDataSource>
              <br />
              <asp:DropDownList ID="lstCustomers" runat="server" AutoPostBack="True" DataSourceID="sourceCustomers" DataTextField="ContactName" DataValueField="CustomerID">

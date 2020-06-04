@@ -14,6 +14,7 @@ namespace datasource1
 
         }
 
+        // toma del dropdownlist1 el valor seleccionado y lo manda como variable prodId al a la vista  queryparameter 
         protected void Button1_Click(object sender, EventArgs e)
         {
             if (DropDownList1.SelectedIndex != -1)

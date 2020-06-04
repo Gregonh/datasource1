@@ -10,6 +10,12 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <!--
+                vista utilizada en sqldatasourcejemplo para hacer la redirect
+                en selectParameter; el querystringparameter tiene un querystringfield que se refiere al campo selected en la otra vista, es el campo mandado para ver
+                
+                
+                -->
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Products] WHERE ([ProductID] = @ProductID1)">
 
                 <SelectParameters>
