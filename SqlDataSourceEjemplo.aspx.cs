@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -27,6 +28,16 @@ namespace datasource1
         protected void sourceCustomersID_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
         {
             e.Command.Parameters["@OrderDate"].Value = DateTime.Today.AddYears(-23);
+
+            //Codigo para depurar el valor de los parametros.
+
+            lblParameters.Text = "Parametros de SqlDataSource sourceCustomersID: <br/>";
+            // recorre los parametros y muestra su nombre y valor
+            foreach (SqlParameter Par in e.Command.Parameters)
+            {
+                lblParameters.Text += "Par: " + Par.ParameterName + ": " + Par.Value.ToString() + "<br/>";
+            }
+
         }
 
         protected void sourceCustomersID_Selected(object sender, SqlDataSourceStatusEventArgs e)
@@ -38,6 +49,10 @@ namespace datasource1
                 // Consider the error handled.
                 e.ExceptionHandled = true;
             }
+
+
+            lblError.Text = "Filas seleccionadas: " + e.AffectedRows;
+
 
         }
     }

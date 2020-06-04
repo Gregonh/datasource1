@@ -66,7 +66,20 @@
 
 
 
+            <!--
+                -un sqldatasource que hara un select
+                -un dropdownlist vinculado al sqldatasource anterior con el datasource id;
+                datatextfield que es lo que se muestra en la lista (el contactname)
+                el datavaluefield manda ese valor al sqldatasource2
+                -otro sqldatasource2 con las dos funciones del .cs
+                    hace un select utilizando el customerid de la lista de arriba (que se referia a la base de datos customers)
+                    usandolo para ahora con ese campo buscar en otra tabla (orders)
+                    parametros: en los que incluimos a la lista de arriba con el nombre de customerid (que es campo de la bd)
+                    el parametro orderdate te lo da la funcion
 
+                - un gridview que en el datakeynames que le pone la key de la tabla y en datasourceid el sqldatasource de arriba
+                    
+                -->
              <asp:SqlDataSource ID="sourceCustomers" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [CustomerID], [ContactName], [CompanyName] FROM [Customers] ORDER BY [ContactName]"></asp:SqlDataSource>
              <br />
              <asp:DropDownList ID="lstCustomers" runat="server" AutoPostBack="True" DataSourceID="sourceCustomers" DataTextField="ContactName" DataValueField="CustomerID">
@@ -97,6 +110,7 @@
 
                 Finalmente definiremos un parametro OrderDate para mostrar las ordenes de pedido con un determinado rango
                 temporal, en este caso con una fecha posterior a la que decidamos
+                mostramos despues las filas afectados y el intervalo de fechas
                 -->
              <asp:GridView ID="gridOrders" runat="server" AutoGenerateColumns="False" DataKeyNames="OrderID" DataSourceID="sourceCustomersID">
                  <Columns>
@@ -108,6 +122,10 @@
              </asp:GridView>
              <br />
              <asp:Label ID="lblError" runat="server" Text="Label"></asp:Label>
+            <br />
+            <!-- usado en la funcion sourcecustomeridSelecting-->
+             <asp:Label ID="lblParameters" runat="server"></asp:Label>
+             <br />
         </div>
     </form>
 </body>
