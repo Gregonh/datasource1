@@ -102,7 +102,88 @@
                 
                 -->
             <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateEditButton="True" DataSourceID="sourceProductDetails" Height="50px" Width="125px">
+                <Fields>
+                    <asp:BoundField DataField="ProductID" HeaderText="ProductID" InsertVisible="False" ReadOnly="True" SortExpression="ProductID" />
+                    <asp:BoundField DataField="ProductName" HeaderText="ProductName" SortExpression="ProductName" />
+                    <asp:BoundField DataField="SupplierID" HeaderText="SupplierID" SortExpression="SupplierID" />
+                    <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" SortExpression="CategoryID" />
+                    <asp:BoundField DataField="QuantityPerUnit" HeaderText="QuantityPerUnit" SortExpression="QuantityPerUnit" />
+                    <asp:BoundField DataField="UnitPrice" HeaderText="UnitPrice" SortExpression="UnitPrice" />
+                    <asp:BoundField DataField="UnitsInStock" HeaderText="UnitsInStock" SortExpression="UnitsInStock" />
+                    <asp:BoundField DataField="UnitsOnOrder" HeaderText="UnitsOnOrder" SortExpression="UnitsOnOrder" />
+                    <asp:BoundField DataField="ReorderLevel" HeaderText="ReorderLevel" SortExpression="ReorderLevel" />
+                    <asp:CheckBoxField DataField="Discontinued" HeaderText="Discontinued" SortExpression="Discontinued" />
+                    <asp:CommandField ShowDeleteButton="True" ShowInsertButton="True" />
+                </Fields>
+            
+            
             </asp:DetailsView>
+            
+            <asp:SqlDataSource ID="sourceProductDetailsNew" runat="server" 
+                  ConflictDetection="CompareAllValues" 
+                  ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+                  OldValuesParameterFormatString="original_{0}" 
+                  SelectCommand="SELECT * FROM [Products] WHERE ([ProductID] = @ProductID)"
+                  UpdateCommand="UPDATE [Products] SET [ProductName] = @ProductName, [SupplierID] = @SupplierID, [CategoryID] = @CategoryID, [QuantityPerUnit] = @QuantityPerUnit, [UnitPrice] = @UnitPrice, [UnitsInStock] = @UnitsInStock, [UnitsOnOrder] = @UnitsOnOrder, [ReorderLevel] = @ReorderLevel, [Discontinued] = @Discontinued WHERE [ProductID] = @original_ProductID AND [ProductName] = @original_ProductName AND (([SupplierID] = @original_SupplierID) OR ([SupplierID] IS NULL AND @original_SupplierID IS NULL)) AND (([CategoryID] = @original_CategoryID) OR ([CategoryID] IS NULL AND @original_CategoryID IS NULL)) AND (([QuantityPerUnit] = @original_QuantityPerUnit) OR ([QuantityPerUnit] IS NULL AND @original_QuantityPerUnit IS NULL)) AND (([UnitPrice] = @original_UnitPrice) OR ([UnitPrice] IS NULL AND @original_UnitPrice IS NULL)) AND (([UnitsInStock] = @original_UnitsInStock) OR ([UnitsInStock] IS NULL AND @original_UnitsInStock IS NULL)) AND (([UnitsOnOrder] = @original_UnitsOnOrder) OR ([UnitsOnOrder] IS NULL AND @original_UnitsOnOrder IS NULL)) AND (([ReorderLevel] = @original_ReorderLevel) OR ([ReorderLevel] IS NULL AND @original_ReorderLevel IS NULL)) AND [Discontinued] = @original_Discontinued" 
+                  OnUpdated="sourceProductDetails_Updated" DeleteCommand="DELETE FROM [Products] WHERE [ProductID] = @original_ProductID AND [ProductName] = @original_ProductName AND (([SupplierID] = @original_SupplierID) OR ([SupplierID] IS NULL AND @original_SupplierID IS NULL)) AND (([CategoryID] = @original_CategoryID) OR ([CategoryID] IS NULL AND @original_CategoryID IS NULL)) AND (([QuantityPerUnit] = @original_QuantityPerUnit) OR ([QuantityPerUnit] IS NULL AND @original_QuantityPerUnit IS NULL)) AND (([UnitPrice] = @original_UnitPrice) OR ([UnitPrice] IS NULL AND @original_UnitPrice IS NULL)) AND (([UnitsInStock] = @original_UnitsInStock) OR ([UnitsInStock] IS NULL AND @original_UnitsInStock IS NULL)) AND (([UnitsOnOrder] = @original_UnitsOnOrder) OR ([UnitsOnOrder] IS NULL AND @original_UnitsOnOrder IS NULL)) AND (([ReorderLevel] = @original_ReorderLevel) OR ([ReorderLevel] IS NULL AND @original_ReorderLevel IS NULL)) AND [Discontinued] = @original_Discontinued" InsertCommand="INSERT INTO [Products] ([ProductName], [SupplierID], [CategoryID], [QuantityPerUnit], [UnitPrice], [UnitsInStock], [UnitsOnOrder], [ReorderLevel], [Discontinued]) VALUES (@ProductName, @SupplierID, @CategoryID, @QuantityPerUnit, @UnitPrice, @UnitsInStock, @UnitsOnOrder, @ReorderLevel, @Discontinued)">
+                    <DeleteParameters>
+                        <asp:Parameter Name="original_ProductID" Type="Int32" />
+                        <asp:Parameter Name="original_ProductName" Type="String" />
+                        <asp:Parameter Name="original_SupplierID" Type="Int32" />
+                        <asp:Parameter Name="original_CategoryID" Type="Int32" />
+                        <asp:Parameter Name="original_QuantityPerUnit" Type="String" />
+                        <asp:Parameter Name="original_UnitPrice" Type="Decimal" />
+                        <asp:Parameter Name="original_UnitsInStock" Type="Int16" />
+                        <asp:Parameter Name="original_UnitsOnOrder" Type="Int16" />
+                        <asp:Parameter Name="original_ReorderLevel" Type="Int16" />
+                        <asp:Parameter Name="original_Discontinued" Type="Boolean" />
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="ProductName" Type="String" />
+                        <asp:Parameter Name="SupplierID" Type="Int32" />
+                        <asp:Parameter Name="CategoryID" Type="Int32" />
+                        <asp:Parameter Name="QuantityPerUnit" Type="String" />
+                        <asp:Parameter Name="UnitPrice" Type="Decimal" />
+                        <asp:Parameter Name="UnitsInStock" Type="Int16" />
+                        <asp:Parameter Name="UnitsOnOrder" Type="Int16" />
+                        <asp:Parameter Name="ReorderLevel" Type="Int16" />
+                        <asp:Parameter Name="Discontinued" Type="Boolean" />
+                    </InsertParameters>
+                    <SelectParameters>
+                      <asp:ControlParameter ControlID="ListBox1" Name="ProductID" PropertyName="SelectedValue" Type="Int32" />
+                  </SelectParameters>
+                  <UpdateParameters>
+                      <asp:Parameter Name="ProductName" Type="String" />
+                      <asp:Parameter Name="SupplierID" Type="Int32" />
+                      <asp:Parameter Name="CategoryID" Type="Int32" />
+                      <asp:Parameter Name="QuantityPerUnit" Type="String" />
+                      <asp:Parameter Name="UnitPrice" Type="Decimal" />
+                      <asp:Parameter Name="UnitsInStock" Type="Int16" />
+                      <asp:Parameter Name="UnitsOnOrder" Type="Int16" />
+                      <asp:Parameter Name="ReorderLevel" Type="Int16" />
+                      <asp:Parameter Name="Discontinued" Type="Boolean" />
+                      <asp:Parameter Name="original_ProductID" Type="Int32" />
+                      <asp:Parameter Name="original_ProductName" Type="String" />
+                      <asp:Parameter Name="original_SupplierID" Type="Int32" />
+                      <asp:Parameter Name="original_CategoryID" Type="Int32" />
+                      <asp:Parameter Name="original_QuantityPerUnit" Type="String" />
+                      <asp:Parameter Name="original_UnitPrice" Type="Decimal" />
+                      <asp:Parameter Name="original_UnitsInStock" Type="Int16" />
+                      <asp:Parameter Name="original_UnitsOnOrder" Type="Int16" />
+                      <asp:Parameter Name="original_ReorderLevel" Type="Int16" />
+                      <asp:Parameter Name="original_Discontinued" Type="Boolean" />
+                  </UpdateParameters>
+              </asp:SqlDataSource>
+              <br />
+              <br />
+              <br />
+            
+            
+            
+            
+            
+            
+            
             <br />
             <br />
              <asp:Label ID="lblInfo" runat="server" Text="Label"></asp:Label>

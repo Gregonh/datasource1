@@ -60,6 +60,15 @@ namespace datasource1
         protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
 
         /// <summary>
+        /// Control sourceProductDetailsNew.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sourceProductDetailsNew;
+
+        /// <summary>
         /// Control lblInfo.
         /// </summary>
         /// <remarks>
