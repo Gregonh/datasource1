@@ -135,6 +135,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="GridViewControl.aspx" />
+    <Content Include="GridViewPractica1_2.aspx" />
     <Content Include="MoreUpdateInsertDelete.aspx" />
     <Content Include="QueryParameter.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -213,6 +214,13 @@
     </Compile>
     <Compile Include="GridViewControl.aspx.designer.cs">
       <DependentUpon>GridViewControl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GridViewPractica1_2.aspx.cs">
+      <DependentUpon>GridViewPractica1_2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GridViewPractica1_2.aspx.designer.cs">
+      <DependentUpon>GridViewPractica1_2.aspx</DependentUpon>
     </Compile>
     <Compile Include="MoreUpdateInsertDelete.aspx.cs">
       <DependentUpon>MoreUpdateInsertDelete.aspx</DependentUpon>
