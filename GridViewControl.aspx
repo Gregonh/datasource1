@@ -11,6 +11,8 @@
     <form id="form1" runat="server">
         <div>
             <!--
+
+
                 - se crea el sqldatasource para hacer un select;
                 el id se usa despues en el gridview para vincularlo (con el datasourceid)
                 el datakeyname en gridview es la clave primaria
@@ -63,6 +65,14 @@
                 <HeaderStyle BackColor="#CCFFCC" BorderColor="#990000" />
                 <SelectedRowStyle BorderColor="#FF9900" BorderStyle="Dotted" Font-Bold="True" />
             </asp:GridView>
+            <!--
+                Selecting o seleccionando un item se refiere a la posibilidad de
+                hacer click en una fila y cambiar su color o alguna propiedad e
+                indicar que el usuario esta trabajando con esa fila del GridView
+                Primero temenos que definir un Style diferente para la fila
+                seleccionada Para ello usaremos la propiedad SelectedRowStyle
+
+                -->
             <br />
             <br />
 

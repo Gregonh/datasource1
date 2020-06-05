@@ -45,6 +45,19 @@
         <br />
         <!--
             el grid tiene 3 funciones que actuarán dos en el label de arriba
+            -Agregamos GridView y añadimos una columna tipo CommandField con
+            ShowSelectButton a true y el texto del boton a “seleccion"
+            <asp: CommandField ShowSelectButton ="true" ButtonType ="button"
+            SelectText ="seleccionar“/>
+
+            - Programamos eventos relacionados con la selección y con el relleno de los datos
+            en el GridView
+
+                SelectedIndexChanging: Cancelamos la selección si CustomerID es ="hanar“
+
+                SelectedIndexChanged: Mostramos en Label que CustomerID se ha seleccionado
+
+                RowDataBound: Asignamos un color diferente a determinadas filas del GridView
             -->
         <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="OrderID" DataSourceID="SqlOrders" OnRowDataBound="GridView2_RowDataBound" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" OnSelectedIndexChanging="GridView2_SelectedIndexChanging">
             <Columns>
@@ -54,13 +67,32 @@
                 <asp:BoundField DataField="OrderDate" HeaderText="OrderDate" SortExpression="OrderDate" />
                 <asp:BoundField DataField="ShipAddress" HeaderText="ShipAddress" SortExpression="ShipAddress" />
                 <asp:BoundField DataField="ShippedDate" HeaderText="ShippedDate" SortExpression="ShippedDate" />
-                <asp:CommandField ButtonType="Button" />
+                <asp:CommandField ButtonType="Button" SelectText="Seleccionar" />
             </Columns>
         </asp:GridView>
-        <br />
-        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-        <br />
+        
         <!--
+            La otra forma de seleccionar una fila no requiere (CON BUTTONFIELD)
+            añadir una nueva columna, podemos utilizar una
+            columna existente para ello (A DIFERENCIA DEL DE ARRIBA QUE USA UN COMMANDFIELD
+            
+            Para ello, eliminamos la columna tipo
+            CommandField y añadimos una columna tipo
+            ButtonField y asignamos la propiedad DataTextField
+            al nombre del campo que queramos usar como
+            botón
+
+             Utilizaremos el evento
+            GridView RowCommand el cual s e produce
+            cuando se hace click en el botón que hemos
+            creado antes en el control Aprovecharemos
+            que un ButtonField puede invocar algunas
+            funciones definidas en CommandName por
+            ejemplo Select, y ser por gestionado por
+            codigo El argumento del CommandName es
+            el indice de la fila seleccionada
+
+
             -tiene una funcion que actua en el label de arriba justo
             - <asp:ButtonField CommandName="Select" DataTextField="OrderID" Text="Botón" />
             ese boton activa la funcion, el commandname es usado en la funcion para la comprobacion
@@ -68,7 +100,11 @@
             el DataTextField="OrderID" corresponde en la funcion al commandargument-> int index = Convert.ToInt32(e.CommandArgument);
             y también es lo que se muestra como texto en el boton
 
+           
             -->
+        <br />
+        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+        <br />
         <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataKeyNames="OrderID" DataSourceID="SqlOrders" OnRowCommand="GridView3_RowCommand">
             <Columns>
                 <asp:BoundField DataField="OrderID" HeaderText="OrderID" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" />

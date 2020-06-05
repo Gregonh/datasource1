@@ -13,5 +13,10 @@ namespace datasource1
         {
 
         }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Label1.Text = "The primary key value of the selected row is " + GridView1.SelectedValue.ToString() + ".";
+        }
     }
 }

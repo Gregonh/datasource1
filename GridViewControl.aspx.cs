@@ -16,7 +16,7 @@ namespace datasource1
 
         protected void GridView2_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
-
+            //accede a la fila actual como un objeto gridviewrow
             GridViewRow row = GridView2.Rows[e.NewSelectedIndex];
 
             // You can cancel the select operation by using the Cancel
@@ -43,11 +43,25 @@ namespace datasource1
             Label1.Text = "You selected " + row.Cells[2].Text + ".";
         }
 
+        /*
+         * Reaccionaremos al evento RowDataBound el cual se lanza por cada fila justo despues de que 
+         * se hayan rellenado con datos en el GridView (podemos verlo en el .aspx)
+         * <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="ProductID" 
+                DataSourceID="sourceProducts" OnRowDataBound="GridView1_RowDataBound">
+
+            Con DataBinder Eval(), que entiende todos los tipos de objetos de datos, 
+        Podemos extraer los valores de cada columna
+         * 
+         * 
+         * */
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            // Para ello accedemos a la fila actual como un objeto GridViewRow el cual está accesible
+            // desde la propiedad Row del parametro GridViewRowEventArgs
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 // Get the price for this row.
+                //A través de GridViewRowEventArgs Row DataItem accedemos a la fila como un objeto GridViewRow
                 decimal price = (decimal)DataBinder.Eval(e.Row.DataItem, "UnitPrice");
                 if (price > 50)
                 {
