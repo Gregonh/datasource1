@@ -40,7 +40,7 @@
                 SQLDataSource servirá como Fuente de datos
                 del control DetailsView
                 -->
-            <asp:SqlDataSource ID="sourceProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [ProductID], [ProductName] FROM [Products]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="sourceProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [ProductID], [ProductName], [SupplierID], [CategoryID], [QuantityPerUnit], [UnitPrice], [UnitsInStock], [UnitsOnOrder], [ReorderLevel], [Discontinued] FROM [Products]"></asp:SqlDataSource>
             <br />
             <br />
             <!--un sqldata source para hacer un update, antes tiene un select para poder ver lo que queremos cambiar-->
@@ -75,50 +75,7 @@
                 
                 -->
 
-            <asp:SqlDataSource ID="sourceProductDetails" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"
-                SelectCommand="SELECT [ProductID], [ProductName], [QuantityPerUnit], [UnitPrice], [UnitsInStock], [UnitsOnOrder], [ReorderLevel], [Discontinued] FROM [Products] WHERE ([ProductID] = @ProductID)" 
-               UpdateCommand="UPDATE [Products] SET [ProductName] = @ProductName, [QuantityPerUnit] = @QuantityPerUnit,
-                              [UnitPrice] = @UnitPrice, [UnitsInStock] = @UnitsInStock, [UnitsOnOrder] = @UnitsOnOrder,
-                             [ReorderLevel] = @ReorderLevel, [Discontinued] = @Discontinued
-                              WHERE [ProductID] = @ProductID
-                              AND ProductName=@original_ProductName AND UnitPrice=@original_UnitPrice 
-                              AND UnitsInStock=@original_UnitsInStock AND UnitsOnOrder=@original_UnitsOnOrder 
-                              AND ReorderLevel=@original_ReorderLevel AND Discontinued=@original_Discontinued" 
-                ConflictDetection="CompareAllValues"
-                OldValuesParameterFormatString="original_{0}"
-                OnUpdated="sourceProductDetails_Updated"> 
-                 <SelectParameters>
-                    <asp:ControlParameter ControlID="ListBox1" Name="ProductID" PropertyName="SelectedValue" Type="Int32" />
-                </SelectParameters>
-            </asp:SqlDataSource>
-             <!-- un controlparameter con el nombre de la lista en el control id y en propertyname selected value-->
-            <br />
-            <br />
-            <!--un detailview con un datasourceid que tiene el nombre delsqldatasource de justo arriba
-                Usar un control DetailsView permite mostrar una
-                fila por cada campo de la tabla que hayamos
-                obtenido Siempre que la propiedad
-                AutoGenerateRows true
-                
-                -->
-            <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateEditButton="True" DataSourceID="sourceProductDetails" Height="50px" Width="125px">
-                <Fields>
-                    <asp:BoundField DataField="ProductID" HeaderText="ProductID" InsertVisible="False" ReadOnly="True" SortExpression="ProductID" />
-                    <asp:BoundField DataField="ProductName" HeaderText="ProductName" SortExpression="ProductName" />
-                    <asp:BoundField DataField="SupplierID" HeaderText="SupplierID" SortExpression="SupplierID" />
-                    <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" SortExpression="CategoryID" />
-                    <asp:BoundField DataField="QuantityPerUnit" HeaderText="QuantityPerUnit" SortExpression="QuantityPerUnit" />
-                    <asp:BoundField DataField="UnitPrice" HeaderText="UnitPrice" SortExpression="UnitPrice" />
-                    <asp:BoundField DataField="UnitsInStock" HeaderText="UnitsInStock" SortExpression="UnitsInStock" />
-                    <asp:BoundField DataField="UnitsOnOrder" HeaderText="UnitsOnOrder" SortExpression="UnitsOnOrder" />
-                    <asp:BoundField DataField="ReorderLevel" HeaderText="ReorderLevel" SortExpression="ReorderLevel" />
-                    <asp:CheckBoxField DataField="Discontinued" HeaderText="Discontinued" SortExpression="Discontinued" />
-                    <asp:CommandField ShowDeleteButton="True" ShowInsertButton="True" />
-                </Fields>
-            
-            
-            </asp:DetailsView>
-            
+
             <asp:SqlDataSource ID="sourceProductDetailsNew" runat="server" 
                   ConflictDetection="CompareAllValues" 
                   ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
@@ -176,6 +133,36 @@
               </asp:SqlDataSource>
               <br />
               <br />
+            
+             <!-- un controlparameter con el nombre de la lista en el control id y en propertyname selected value-->
+            <br />
+            <br />
+            <!--un detailview con un datasourceid que tiene el nombre delsqldatasource de justo arriba
+                Usar un control DetailsView permite mostrar una
+                fila por cada campo de la tabla que hayamos
+                obtenido Siempre que la propiedad
+                AutoGenerateRows true
+                
+                -->
+            <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateEditButton="True" DataSourceID="sourceProductDetailsNew" Height="50px" Width="125px">
+                <Fields>
+                    <asp:BoundField DataField="ProductID" HeaderText="ProductID" InsertVisible="False" ReadOnly="True" SortExpression="ProductID" />
+                    <asp:BoundField DataField="ProductName" HeaderText="ProductName" SortExpression="ProductName" />
+                    <asp:BoundField DataField="SupplierID" HeaderText="SupplierID" SortExpression="SupplierID" />
+                    <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" SortExpression="CategoryID" />
+                    <asp:BoundField DataField="QuantityPerUnit" HeaderText="QuantityPerUnit" SortExpression="QuantityPerUnit" />
+                    <asp:BoundField DataField="UnitPrice" HeaderText="UnitPrice" SortExpression="UnitPrice" />
+                    <asp:BoundField DataField="UnitsInStock" HeaderText="UnitsInStock" SortExpression="UnitsInStock" />
+                    <asp:BoundField DataField="UnitsOnOrder" HeaderText="UnitsOnOrder" SortExpression="UnitsOnOrder" />
+                    <asp:BoundField DataField="ReorderLevel" HeaderText="ReorderLevel" SortExpression="ReorderLevel" />
+                    <asp:CheckBoxField DataField="Discontinued" HeaderText="Discontinued" SortExpression="Discontinued" />
+                    <asp:CommandField ShowDeleteButton="True" ShowInsertButton="True" />
+                </Fields>
+            
+            
+            </asp:DetailsView>
+            
+            
               <br />
             
             
