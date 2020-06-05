@@ -134,6 +134,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="GridViewCategoriesProducts.aspx" />
     <Content Include="GridViewControl.aspx" />
     <Content Include="GridViewPractica1_2.aspx" />
     <Content Include="MoreUpdateInsertDelete.aspx" />
@@ -207,6 +208,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GridViewCategoriesProducts.aspx.cs">
+      <DependentUpon>GridViewCategoriesProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GridViewCategoriesProducts.aspx.designer.cs">
+      <DependentUpon>GridViewCategoriesProducts.aspx</DependentUpon>
     </Compile>
     <Compile Include="GridViewControl.aspx.cs">
       <DependentUpon>GridViewControl.aspx</DependentUpon>
