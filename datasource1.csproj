@@ -114,6 +114,10 @@
     <Content Include="App_Data\northwnd_log.ldf">
       <DependentUpon>northwnd.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\pubs.mdf" />
+    <Content Include="App_Data\pubs_log.ldf">
+      <DependentUpon>pubs.mdf</DependentUpon>
+    </Content>
     <Content Include="AutoresTitulos.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -122,6 +126,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EmployeeOrder.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -205,6 +210,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeOrder.aspx.cs">
+      <DependentUpon>EmployeeOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeeOrder.aspx.designer.cs">
+      <DependentUpon>EmployeeOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
