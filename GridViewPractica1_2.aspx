@@ -13,7 +13,10 @@
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
                 SelectCommand="SELECT [ProductID], [ProductName], [UnitPrice], [QuantityPerUnit] FROM [Products]"></asp:SqlDataSource>
         </div>
-        <!--
+        <!--GridView tiene la propiedad DataSource, que permite un data bind mediante DataBind(), pero
+            no tiene DataTextField y DataValueField, ya que automaticamnete se generan columnas para
+            cada campo que se vaya a representar
+
            - destacar q tiene un ShowFooter="True"
             despues el <FooterStyle BorderStyle="Double" Font-Bold="True" />
            - <ItemStyle BorderStyle="Dashed" /> para poner con rayas LAS FILAS
